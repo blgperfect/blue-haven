@@ -1,0 +1,2 @@
+**systeme profile**
+# si le role est changé avec des emoji ou autre le bot ne reconais pas ce role du moin lors de la commande activation profile il recrée le role qui avais éété modifié avec emoji donc ses probable que le bot ne le reconnaisse pas lors du profils crée etc

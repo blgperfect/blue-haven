@@ -68,10 +68,11 @@ module.exports = async (_client, interaction) =>{
           const selfRoleChannel = guild.channels.cache.find(ch => ch.name === '🎭┃self-role-profile');
           if (selfRoleChannel) {
             const embed = new EmbedBuilder()
-              .setTitle('Personnalisez votre profil ! 🎭')
-              .setDescription(
-                'Sélectionnez les rôles qui vous représentent pour les afficher sur votre profil. Cliquez sur le bouton ci-dessous pour commencer.'
+            .setTitle('╭━━━༻🎭༺━━━╮\n✨ **Personnalisez votre profil !** ✨\n╰━━━༻🌟༺━━━╯')
+            .setDescription(
+                '❀ 🎭 Sélectionnez les rôles qui vous représentent. \n❀ 🎨 Ils s\'afficheront fièrement sur votre profil. \n➤ **Appuyez sur le bouton ci-dessous pour commencer.** '
               )
+              .setImage('https://media.discordapp.net/attachments/1102406059722801184/1328858043810713741/C19CDA1A-0073-415A-8E4E-368A56761788.jpg?ex=67883afe&is=6786e97e&hm=ab19dbb45645b3f1da96f244019c78b508e46328de5062dfe3b084085ccd9685&=&format=webp&width=1025&height=388')
               .setColor('#3498DB');
 
             const roleButton = new ActionRowBuilder().addComponents(
