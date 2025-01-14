@@ -1,0 +1,21 @@
+[
+    {
+      "name": "Sociable",
+      "description": "Obtenez ce badge après 5 rencontres réussies.",
+      "criteria": "5 rencontres",
+      "imagePath": "/assets/sociable.png"
+    },
+    {
+      "name": "Populaire",
+      "description": "Obtenez ce badge après avoir reçu 10 feedbacks positifs.",
+      "criteria": "10 feedbacks positifs",
+      "imagePath": "/assets/popular.png"
+    },
+    {
+      "name": "Curieux",
+      "description": "Obtenez ce badge après 3 intérêts différents.",
+      "criteria": "3 intérêts différents",
+      "imagePath": "/assets/curious.png"
+    }
+  ]
+  
