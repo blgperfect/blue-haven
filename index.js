@@ -6,8 +6,9 @@ const connectDB = require('./database/connect');
 const Maintenance = require('./database/models/maintenance');
 const welcomeEvent = require('./welcome.js');
 const commands = require('./commands');
-const buttonHandlers = require('./interactions/buttonHandlers');
 const likeManager = require('./utils/likeManager');
+const getAllFiles = require("./utils/getAllFiles")
+const path = require("path")
 
 // Initialisation du client Discord
 const client = new Client({
@@ -57,7 +58,7 @@ client.once('ready', async () => {
 
 // Middleware pour gérer la maintenance
 client.on('interactionCreate', async (interaction) => {
-    if (!interaction.isCommand()) return;
+    if (!interaction.isChatInputCommand()) return;
 
     const devId = '808313178739048489'; // Votre ID de développeur
     const command = commands.find(cmd => cmd.data.name === interaction.commandName);
@@ -91,9 +92,23 @@ client.on('interactionCreate', async (interaction) => {
 
 
 // Gestion des boutons
+
 client.on('interactionCreate', async (interaction) => {
-    if (interaction.isButton()) {
-        await buttonHandlers.handleButtonInteraction(interaction);
+        const interactionFolders = getAllFiles(path.join(__dirname, "./interactions"), "folders")
+
+    for (const subFolder of interactionFolders) {
+        const interactionFiles = getAllFiles(subFolder, "files", true)
+    
+        for (const eventFile of interactionFiles) {
+            try {
+                const eventFunction = require(eventFile);
+                // const eventFunction = eventModule.default;
+
+                await eventFunction(client, interaction);
+            } catch (error) {
+                console.error(error);
+            }
+        }
     }
 });
 
