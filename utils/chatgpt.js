@@ -20,4 +20,19 @@ async function getChatGPTResponse(messages) {
     }
 }
 
-module.exports = { getChatGPTResponse };
+async function generateImage(prompt) {
+    try {
+        const response = await openai.images.generate({
+            prompt, // Description textuelle pour l'image
+            n: 1, // Nombre d'images générées
+            size: "1024x1024", // Taille de l'image
+        });
+
+        return response.data[0].url;
+    } catch (error) {
+        console.error("Erreur avec DALL·E :", error);
+        return null;
+    }
+}
+
+module.exports = { getChatGPTResponse, generateImage };
