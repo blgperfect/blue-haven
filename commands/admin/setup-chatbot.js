@@ -25,7 +25,6 @@ module.exports = {
         const salon = interaction.options.getChannel('salon');
 
         if (activer) {
-            // Vérifier si un salon est fourni
             if (!salon) {
                 return interaction.reply({
                     content: "❌ Vous devez spécifier un salon pour activer le chatbot.",
@@ -33,7 +32,6 @@ module.exports = {
                 });
             }
 
-            // Enregistrer le salon dans la base de données
             await ChatbotConfig.findOneAndUpdate(
                 { serverId: interaction.guild.id },
                 { serverId: interaction.guild.id, channelId: salon.id },
@@ -42,7 +40,6 @@ module.exports = {
 
             return interaction.reply(`✅ Chatbot activé dans le salon <#${salon.id}>.`);
         } else {
-            // Désactiver le chatbot
             await ChatbotConfig.findOneAndDelete({ serverId: interaction.guild.id });
             return interaction.reply("❌ Chatbot désactivé pour ce serveur.");
         }

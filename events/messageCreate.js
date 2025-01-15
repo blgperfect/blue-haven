@@ -1,8 +1,19 @@
 const ChatbotConfig = require('../database/models/ChatbotConfig');
 const { getChatGPTResponse } = require('../utils/chatgpt');
+const Conversation = require('../database/models/Conversation');
+const { EmbedBuilder } = require('discord.js');
 
-// Stocker la mémoire en RAM
-const conversationMemory = {};
+async function splitMessageAndReply(message, content) {
+    const MAX_CHARACTERS = 2000;
+    if (content.length <= MAX_CHARACTERS) {
+        await message.reply(content);
+    } else {
+        const parts = content.match(/.{1,2000}/g);
+        for (const part of parts) {
+            await message.reply(part);
+        }
+    }
+}
 
 module.exports = {
     name: 'messageCreate',
@@ -14,23 +25,27 @@ module.exports = {
 
         const userId = message.author.id;
 
-        // Initialiser la mémoire pour cet utilisateur s'il n'existe pas
-        if (!conversationMemory[userId]) {
-            conversationMemory[userId] = [];
+        let conversation = await Conversation.findOne({ userId, serverId: message.guild.id });
+        if (!conversation) {
+            conversation = new Conversation({ userId, serverId: message.guild.id, messages: [] });
         }
 
-        // Ajouter le message de l'utilisateur à la mémoire
-        conversationMemory[userId].push({ role: 'user', content: message.content });
+        conversation.messages.push({ role: 'user', content: message.content });
 
         try {
-            // Appeler OpenAI avec le contexte de la mémoire
-            const response = await getChatGPTResponse(conversationMemory[userId]);
+            const response = await getChatGPTResponse(conversation.messages);
 
-            // Ajouter la réponse de ChatGPT à la mémoire
-            conversationMemory[userId].push({ role: 'assistant', content: response });
+            conversation.messages.push({ role: 'assistant', content: response });
+            await conversation.save();
 
-            // Répondre à l'utilisateur
-            await message.reply(response);
+            const embed = new EmbedBuilder()
+                .setColor('#00FF00')
+                .setDescription(response)
+                .setFooter({
+                    text: `Réponse pour ${message.author.username}`,
+                    iconURL: message.author.displayAvatarURL(),
+                });
+            await message.channel.send({ embeds: [embed] });
         } catch (error) {
             console.error('Erreur lors de l’appel à OpenAI :', error);
             await message.reply("Désolé, une erreur est survenue lors de ma réponse.");

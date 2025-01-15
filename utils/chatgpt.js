@@ -9,7 +9,7 @@ async function getChatGPTResponse(messages) {
     try {
         const response = await openai.chat.completions.create({
             model: "gpt-3.5-turbo",
-            messages, // Fournir la liste des messages (contexte)
+            messages,
             max_tokens: 150,
         });
 
