@@ -2,14 +2,14 @@ const { OpenAI } = require('openai');
 require('dotenv').config();
 
 const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY, // Votre clé API OpenAI
+    apiKey: process.env.OPENAI_API_KEY,
 });
 
-async function getChatGPTResponse(prompt) {
+async function getChatGPTResponse(messages) {
     try {
         const response = await openai.chat.completions.create({
-            model: "gpt-3.5-turbo", // Modèle à utiliser
-            messages: [{ role: "user", content: prompt }],
+            model: "gpt-3.5-turbo",
+            messages, // Fournir la liste des messages (contexte)
             max_tokens: 150,
         });
 
