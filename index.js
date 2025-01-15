@@ -9,6 +9,7 @@ const commands = require('./commands');
 const likeManager = require('./utils/likeManager');
 const getAllFiles = require("./utils/getAllFiles")
 const path = require("path")
+const messageCreateHandler = require('./events/messageCreate'); // Chemin vers messageCreate.js
 
 // Initialisation du client Discord
 const client = new Client({
@@ -120,6 +121,10 @@ client.on('messageReactionAdd', async (reaction, user) => {
 
 // Gestion des événements de bienvenue
 client.on(welcomeEvent.name, (...args) => welcomeEvent.execute(...args));
+
+//gestions du chatbot
+client.on('messageCreate', (message) => messageCreateHandler.execute(message));
+
 
 // Gestion des erreurs
 process.on('unhandledRejection', (error) => {
