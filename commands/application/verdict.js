@@ -44,7 +44,7 @@ module.exports = {
                 .slice((page - 1) * pageSize, page * pageSize)
                 .map(app => ({
                     label: `${app.username} - ${new Date(app.createdAt).toLocaleString()}`,
-                    description: `Cliquez pour voir la candidature.`,
+                    description: "Cliquez pour voir la candidature.",
                     value: app._id.toString(),
                 }));
 
@@ -142,7 +142,7 @@ module.exports = {
                             });
 
                             const user = await interaction.client.users.fetch(application.userId);
-                            await user.send(`🎉 Félicitations, votre candidature pour le rôle a été acceptée !`);
+                            await user.send("🎉 Félicitations, votre candidature pour le rôle a été acceptée !");
 
                             if (!actionInteraction.replied && !actionInteraction.deferred) {
                                 await actionInteraction.reply({

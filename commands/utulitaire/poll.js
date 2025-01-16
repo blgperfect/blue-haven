@@ -42,8 +42,8 @@ module.exports = {
             .setTitle('📊 Sondage')
             .setDescription(`**${question}**`)
             .addFields(
-                { name: option1, value: `Votes : 0`, inline: true },
-                { name: option2, value: `Votes : 0`, inline: true }
+                { name: option1, value: "Votes : 0", inline: true },
+                { name: option2, value: "Votes : 0", inline: true }
             )
             .setColor('#1E90FF');
 
