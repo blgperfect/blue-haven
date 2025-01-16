@@ -10,8 +10,8 @@ const ChannelManager = require('../../utils/channelManager');
 module.exports = async (_client, interaction) => {
     if (!interaction.isStringSelectMenu()) return;
 
-  const { customId, user, member, guild } = interaction;
-  
+  const { customId, guild } = interaction;
+   
   if (!customId.startsWith('select-roles-')) return;
   
       try {
