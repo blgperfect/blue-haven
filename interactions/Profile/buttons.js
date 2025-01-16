@@ -288,7 +288,7 @@ module.exports = async (_client, interaction) =>{
 
         modal.addComponents(
           new ActionRowBuilder().addComponents(
-            new TextInputBuilder()
+            new TextInputBuilder() 
               .setCustomId('profile-name')
               .setLabel('Modifier votre nom')
               .setValue(profile.name || '')

@@ -10,7 +10,7 @@ module.exports = {
         );
 
         if (existingChannel) {
-          console.log(`ℹ️ Le salon "${channelData.name}" existe déjà.`);
+          console.log(`ℹ️ Le salon "${channelData.name}" existe déjà.`); 
           continue;
         }
 
