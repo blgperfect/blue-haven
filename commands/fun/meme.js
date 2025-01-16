@@ -22,7 +22,7 @@ module.exports = {
             const randomMeme = memes[Math.floor(Math.random() * memes.length)];
 
             // Répondre avec le mème
-            await interaction.reply({ content: `🎉 Voici un mème pour toi :`, files: [randomMeme.url] });
+            await interaction.reply({ content: "🎉 Voici un mème pour toi :", files: [randomMeme.url] });
         } catch (error) {
             console.error('Erreur lors de la récupération du mème :', error);
             await interaction.reply('❌ Une erreur est survenue en essayant d\'obtenir un mème.');

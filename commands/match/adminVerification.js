@@ -89,7 +89,7 @@ module.exports = {
       }
 
       await user.send(
-        `✅ Félicitations, votre demande de vérification a été approuvée ! Vous avez reçu le rôle "Vérifié".`
+        '✅ Félicitations, votre demande de vérification a été approuvée ! Vous avez reçu le rôle "Vérifié".'
       );
       return interaction.reply({
         content: `✅ La demande de vérification de **${user.username}** a été approuvée.`,

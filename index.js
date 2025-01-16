@@ -26,34 +26,34 @@ const client = new Client({
 
 // Efface le terminal et affiche un message de démarrage
 console.clear();
-console.log(chalk.blue.bold(`System >> Initialisation...`));
+console.log(chalk.blue.bold("System >> Initialisation..."));
 
 client.once('ready', async () => {
     console.log(chalk.green(`✅ Connecté en tant que ${client.user.tag}`));
 
     // Connexion à MongoDB
-    console.log(chalk.blue(`🔗 Connexion à MongoDB...`));
+    console.log(chalk.blue("🔗 Connexion à MongoDB..."));
     await connectDB();
-    console.log(chalk.green(`✅ Connexion à MongoDB réussie !`));
+    console.log(chalk.green("✅ Connexion à MongoDB réussie !"));
 
     // Définir l'activité du bot
     client.user.setPresence({
         activities: [{ name: 'Blue Haven', type: 3 }], // 3 = Écoute (Listening to)
         status: 'online',
     });
-    console.log(chalk.yellow(`🎧 Activité définie : "Écoute Blue Haven"`));
+    console.log(chalk.yellow('🎧 Activité définie : "Écoute Blue Haven"'));
 
     // Déploiement des commandes globales
     const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);
     try {
-        console.log(chalk.yellow(`🚀 Déploiement des commandes globales...`));
+        console.log(chalk.yellow("🚀 Déploiement des commandes globales..."));
         await rest.put(
             Routes.applicationCommands(process.env.CLIENT_ID),
             { body: commands.map(command => command.data.toJSON()) }
         );
-        console.log(chalk.green(`✅ Commandes globales déployées avec succès !`));
+        console.log(chalk.green("✅ Commandes globales déployées avec succès !"));
     } catch (error) {
-        console.error(chalk.red(`❌ Erreur lors du déploiement des commandes :`, error));
+        console.error(chalk.red("❌ Erreur lors du déploiement des commandes :", error));
     }
 });
 
@@ -128,13 +128,13 @@ client.on('messageCreate', (message) => messageCreateHandler.execute(message));
 
 // Gestion des erreurs
 process.on('unhandledRejection', (error) => {
-    console.error(chalk.red(`❌ Rejet non géré :`, error));
+    console.error(chalk.red("❌ Rejet non géré :", error));
 });
 
 process.on('warning', (warn) => {
-    console.warn(chalk.yellow(`⚠️ Avertissement :`, warn));
+    console.warn(chalk.yellow("⚠️ Avertissement :", warn));
 });
 
 // Connexion du bot
 client.login(process.env.DISCORD_TOKEN);
-console.log(chalk.cyan.bold(`🔑 Tentative de connexion au bot...`));
+console.log(chalk.cyan.bold("🔑 Tentative de connexion au bot..."));
