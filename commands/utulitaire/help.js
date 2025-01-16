@@ -63,7 +63,7 @@ module.exports = {
 
             const commandsList = files.map(file => {
                 const command = require(path.join(categoryPath, file));
-                if (command.data && command.data.name && command.data.description) {
+                if (command.data?.name && command.data.description) {
                     return `\`/${command.data.name}\` : ${command.data.description}`;
                 }
                 return null;
