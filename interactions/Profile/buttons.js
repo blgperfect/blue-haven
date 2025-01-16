@@ -217,74 +217,9 @@ module.exports = async (_client, interaction) =>{
         });
     }
     
-    case 'edit-roles': {
-      const categories = Object.keys(RoleManager.roleCategories).map((category) => ({
-          id: category,
-          label: category.charAt(0).toUpperCase() + category.slice(1).replace('_', ' '),
-      }));
+    
   
-      if (!categories.length) {
-          return interaction.reply({
-              content: '❌ Aucune catégorie de rôles disponible.',
-              ephemeral: true,
-          });
-      }
   
-      const buttons = categories.map((category) =>
-          new ButtonBuilder()
-              .setLabel(category.label)
-              .setCustomId(`edit-role-${category.id}`)
-              .setStyle(ButtonStyle.Primary)
-      );
-  
-      const rows = [];
-      for (let i = 0; i < buttons.length; i += 5) {
-          rows.push(new ActionRowBuilder().addComponents(buttons.slice(i, i + 5)));
-      }
-  
-      const embed = new EmbedBuilder()
-          .setTitle('Modifier vos rôles')
-          .setDescription('Choisissez une catégorie pour modifier vos rôles.')
-          .setColor('#3498DB');
-  
-      await interaction.deferReply({ ephemeral: true });
-      return interaction.editReply({
-          embeds: [embed],
-          components: rows,
-      });
-  }
-  
-  case customId.startsWith('edit-role-') && customId: {
-      const category = customId.replace('edit-role-', '');
-      const roles = RoleManager.getRolesByCategory(category);
-  
-      if (!roles || roles.length === 0) {
-          return interaction.reply({
-              content: `❌ Aucun rôle disponible pour la catégorie **${category}**.`,
-              ephemeral: true,
-          });
-      }
-  
-      const roleMenu = new StringSelectMenuBuilder()
-          .setCustomId(`select-roles-${category}`)
-          .setPlaceholder('Choisissez vos rôles...')
-          .setMinValues(0)
-          .setMaxValues(roles.length)
-          .addOptions(
-              roles.map((role) => ({
-                  label: role,
-                  value: role,
-              }))
-          );
-  
-      const roleRow = new ActionRowBuilder().addComponents(roleMenu);
-  
-      await interaction.deferReply({ ephemeral: true });
-      return interaction.editReply({
-          content: `Sélectionnez vos rôles pour la catégorie **${category}**.`,
-          components: [roleRow],
-      });
-  }
   
       /** ========================
        * Gestion des profils (embeds avec boutons)
