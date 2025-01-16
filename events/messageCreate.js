@@ -1,6 +1,6 @@
 const ChatbotConfig = require('../database/models/ChatbotConfig');
 const { getChatGPTResponse } = require('../utils/chatgpt');
-const Conversation = require('../database/models/Conversation');
+const Conversation = require('../database/models/ChatbotConvo');
 const { EmbedBuilder } = require('discord.js');
 
 async function splitMessageAndReply(message, content) {

@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, PermissionsBitField, ChannelType, ActionRowBuilder, StringSelectMenuBuilder } = require('discord.js');
 const Settings = require('../../database/models/settings');
-const Application = require('../../database/models/applications');
+const Application = require('../../database/models/applyData.js');
 
 module.exports = {
     data: new SlashCommandBuilder()

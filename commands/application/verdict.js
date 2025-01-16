@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, ActionRowBuilder, StringSelectMenuBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, PermissionsBitField } = require('discord.js');
-const Application = require('../../database/models/applications');
+const Application = require('../../database/models/applyData.js');
 const Settings = require('../../database/models/settings');
 const { ModalBuilder, TextInputBuilder, TextInputStyle } = require('discord.js');
 

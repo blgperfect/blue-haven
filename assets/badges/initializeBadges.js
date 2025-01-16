@@ -1,5 +1,5 @@
 // initializeBadges.js
-const BadgeModel = require('./models/profilBadge'); // Correction du chemin
+const BadgeModel = require('./database/models/profilBadge'); // Correction du chemin
 
 async function initializeBadges() {
   const badges = [

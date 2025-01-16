@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, PermissionsBitField, AttachmentBuilder } = require('discord.js');
 const { parse } = require('json2csv');
-const Application = require('../../database/models/applications');
+const Application = require('../../database/models/applyData.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
