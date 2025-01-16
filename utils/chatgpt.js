@@ -22,10 +22,14 @@ async function getChatGPTResponse(messages) {
 
 async function generateImage(prompt) {
     try {
+        // Enrichir la description pour des résultats plus pertinents
+        const enhancedPrompt = `Créez une illustration détaillée et réaliste de : ${prompt}. 
+        Ajoutez des couleurs vives, des détails artistiques et une touche créative.`;
+
         const response = await openai.images.generate({
-            prompt, // Description textuelle pour l'image
-            n: 1, // Nombre d'images générées
-            size: "1024x1024", // Taille de l'image
+            prompt: enhancedPrompt,
+            n: 1,
+            size: "1024x1024",
         });
 
         return response.data[0].url;
