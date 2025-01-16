@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, PermissionsBitField, AttachmentBuilder } = require('discord.js');
+const { SlashCommandBuilder, PermissionsBitField, AttachmentBuilder, StringSelectMenuBuilder, ActionRowBuilder } = require('discord.js');
 const { parse } = require('json2csv');
 const Application = require('../../database/models/applyData.js');
 
